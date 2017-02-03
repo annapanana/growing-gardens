@@ -12,8 +12,9 @@
 
 To Do:
 Hover state for remove button in plot modal
-Fix button selection state
 Media query for updating card class on smaller devices
+Media query for canvas layout on smaller page (produce page)
 
 Known Bugs:
 SVG gaps should still register as "hovered" or "clicked"
+Fix button selection state is broken
