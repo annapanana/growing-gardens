@@ -15,6 +15,11 @@
     vm.needPosts = [];
     vm.havePosts = [];
     vm.getPosts = getPosts;
+    vm.buttonMenu = {
+      category: true,
+      search: true,
+      toggle: true
+    }
 
     vm.$onInit = function() {
       vm.getPosts();
@@ -23,6 +28,26 @@
     vm.changeCategory = function (category) {
       $stateParams.category = category;
       vm.getPosts();
+    };
+
+    vm.toggleMenu = function(menuType){
+
+      // close this one
+      if (!vm.buttonMenu[menuType]) {
+        console.log("collapsing?");
+        vm.buttonMenu[menuType] = true;
+      } else {
+        // close other and open this one
+        for (var key in vm.buttonMenu) {
+          if (menuType === key) {
+            vm.buttonMenu[key] = false;
+          } else {
+            vm.buttonMenu[key] = true;
+          }
+        }
+      }
+
+      console.log(menuType, vm.buttonMenu[menuType]);
     };
 
     // +++++GET ALL POSTS+++++
@@ -54,6 +79,12 @@
         }
       }
     }
+
+    vm.viewState = 'offerings';
+    vm.toggleView = function(state) {
+      vm.viewState = state;
+    };
+
     // +++++NEW POST TO DATABASE & all form field data+++++
     vm.createPost = function () {
       ModalService.showModal({

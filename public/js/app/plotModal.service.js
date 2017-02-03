@@ -2,7 +2,6 @@
 (function() {
   angular.module('app')
   .service('plotModal', function() {
-
     this.getModal = function($http, ModalService, plot_id, gardenService) {
       ModalService.showModal({
         templateUrl: "js/garden/modal_plot.html",
@@ -22,18 +21,7 @@
             });
           });
 
-          // Get User Id for update priveladges
-          // $scope.getUID = function(plot_id) {
-          //
-          //   var UID = parseInt($.cookie('user_info'));
-          //   // console.log($scope.singlePlot);
-          //   // console.log("this user", $scope.singlePlot.user_id);
-          //   if(UID === plot_id) {
-          //     return true;
-          //   } else {
-          //     return false;
-          //   }
-          // };
+          // TODO check if the UID matches the plot user id
 
           $scope.removeProduce = function(produce_id) {
             $http.delete(`/api/producePlots/${plot_id}/${produce_id}`).then(function(result) {
@@ -50,14 +38,10 @@
           }
 
           $scope.addProduce = function() {
-            console.log("add produce");
             // Any food item should be set to uppercase
             $scope.newProduce = capitalize($scope.newProduce);
-
-            // Make everything uppercase
             // Check produce DB to see if produce exists, if not add default produce url
             $http.get(`/api/produce`).then(function(result) {
-              console.log(result);
               let newProduce = {};
               for (var i = 0; i < result.data.length; i++) {
                 if (result.data[i].produce_name === $scope.newProduce) {

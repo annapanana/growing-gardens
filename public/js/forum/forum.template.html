@@ -5,49 +5,153 @@
   </div>
 </div>
 <div>
-<h1 class="text-center header-style color-green-dark">FORUM</h1>
-<h5 class="text-center header-style color-green-dark">A place for the community to connect. </h5>
+  <h1 class="text-center header-style color-green-dark">FORUM</h1>
+  <h5 class="text-center header-style color-green-dark">A place for the community to connect. </h5>
 </div>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-<div class="row search-bar-spacing">
-  <div class="col-md-3"></div>
-  <div class="col-md-6 button-header">
-<ul class="nav nav-pills">
-   <li role="presentation" class="active">
+<div class="center-flex row-padding">
+  <button class="button-primary btn" ng-click="$ctrl.toggleMenu('category')" type="button" name="button">Filter</button>
+  <button class="button-primary btn" ng-click="$ctrl.toggleMenu('search')" type="button" name="button">Search</button>
+  <button class="button-primary btn" ng-click="$ctrl.toggleMenu('toggle')" type="button" name="button">Toggle</button>
+  <button class="button-primary btn" ng-click="$ctrl.createPost()" type="button" name="button">Create</button>
+</div>
+
+<!-- Category Selection -->
+<div class="row center-flex">
+  <div uib-collapse="$ctrl.buttonMenu.category" horizontal>
+    <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('all')" ng-class="{'filter-button-active': $ctrl.category === 'all'}"><h5 class="subtext-style">All</h5></button>
+
+    <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('help')" ng-class="{'filter-button-active': $ctrl.category === 'help'}"><h5 class="subtext-style">Help</h5></button>
+
+    <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('tools')" ng-class="{'filter-button-active': $ctrl.category === 'web'}"><h5 class="subtext-style">Tools</h5></button>
+
+    <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('seeds')" ng-class="{'filter-button-active': $ctrl.category === 'seeds'}"><h5 class="subtext-style">Seeds</h5></button>
+
+    <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('food')" ng-class="{'filter-button-active': $ctrl.category === 'food'}"><h5 class="subtext-style">Food</h5></button>
+
+    <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('miscellaneous')" ng-class="{'filter-button-active': $ctrl.category === 'miscellaneous'}"><h5 class="subtext-style">Misc</h5></button>
+    <h4 class="color-green-light text-center">select a category filter to narrow-down your search</h4>
+  </div>
+</div>
+
+<!-- Search -->
+<div class="row" uib-collapse="$ctrl.buttonMenu.search" horizontal>
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
     <input name="search" ng-model="searchText" type="search" class="form-control input-sm search-form" placeholder="Search by keyword">
-   </li>
-</ul>
+    <h4 class="color-green-light text-center">search for specific items or people</h4>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<!-- Switch View -->
+<div class="row" uib-collapse="$ctrl.buttonMenu.toggle" horizontal>
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="center-flex">
+      <button type="button" class="button-primary button btn" ng-click="$ctrl.toggleView('offerings')"><h5 class="subtext-style">Offerings</h5></button>
+      <button type="button" class="button-primary button btn" ng-click="$ctrl.toggleView('requests')"><h5 class="subtext-style">Requests</h5></button>
+    </div>
+    <h4 class="color-green-light text-center">toggle between requests and offerings to view what is available or needed in your community</h4>
   </div>
   <div class="col-md-3"></div>
 </div>
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-<div class="button-header">
-  <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('all')" ng-class="{'filter-button-active': $ctrl.category === 'all'}"><h5 class="subtext-style">All</h5></button>
 
-  <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('help')" ng-class="{'filter-button-active': $ctrl.category === 'help'}"><h5 class="subtext-style">Help</h5></button>
+<!-- Create Post -->
+<!-- <div class="row">
+  <div class="left-flex">
+    <button type="button" class="button-primary button btn" ng-click="$ctrl.createPost()"><h5 class="subtext-style">CREATE POST</h5></button>
+  </div>
+  <h5 class="color-green-light">create a new post to request or offer somethings to your community</h5>
+</div> -->
 
-  <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('tools')" ng-class="{'filter-button-active': $ctrl.category === 'web'}"><h5 class="subtext-style">Tools</h5></button>
 
-  <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('seeds')" ng-class="{'filter-button-active': $ctrl.category === 'seeds'}"><h5 class="subtext-style">Seeds</h5></button>
-
-  <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('food')" ng-class="{'filter-button-active': $ctrl.category === 'food'}"><h5 class="subtext-style">Food</h5></button>
-
-  <button type="button" class="button-primary button btn" ng-click="$ctrl.changeCategory('miscellaneous')" ng-class="{'filter-button-active': $ctrl.category === 'miscellaneous'}"><h5 class="subtext-style">Misc</h5></button>
+<!-- Offerings -->
+<div class="row" ng-show="$ctrl.viewState==='offerings'">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="row">
+      <h2 class="header-style color-green-dark">Offerings</h2>
+      <h5 class="subtext-style color-green-dark">from your fellow community gardeners</h5>
+    </div>
+    <div class="row">
+      <div class="card-group" ng-repeat="post in $ctrl.havePosts | orderBy : post.created_at : true | filter : searchText">
+        <div class="card">
+          <div class="col-md-3">
+            <img class="ugc-image" ng-src="{{post.posts_image_url || 'https://cdn4.iconfinder.com/data/icons/gardening-icons-2/100/3-512.png'}}"/>
+          </div>
+          <div class="col-md-9">
+            <div class="card-line">
+              <h5 class="forum-text-padding"><b>Name:</b></h5>
+              <h5>{{post.posts_name}}</h5>
+            </div>
+            <div class="card-line">
+              <h5 class="forum-text-padding"><b>Description:</b></h5>
+              <h5>{{post.description}}</h5>
+            </div>
+            <div class="card-line">
+              <h5 class="forum-text-padding"><b>Contact:</b></h5>
+              <h5>{{post.contact}}</h5>
+            </div>
+            <div class="card-line">
+              <h5 class="forum-text-padding"><b>Posted:</b></h5>
+              <h5><time am-time-ago="post.created_at">{{post.created_at}}</time></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
 </div>
 
-<div class="button-header">
-      <button type="button" class="button-primary button btn" ng-click="$ctrl.createPost()"><h5 class="subtext-style">CREATE POST</h5></button>
+<!-- Requests -->
+<div class="row" ng-show="$ctrl.viewState==='requests'">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="row">
+      <h2 class="header-style color-green-dark">Requests</h2>
+      <h5 class="subtext-style color-green-dark">from your fellow community gardeners</h5>
+    </div>
+    <div class="row">
+      <div class="card-group" ng-repeat="post in $ctrl.needPosts | orderBy : post.created_at : true | filter : searchText">
+        <div class="card">
+          <div class="col-md-3">
+            <img class="ugc-image" ng-src="{{post.posts_image_url || 'https://cdn4.iconfinder.com/data/icons/gardening-icons-2/100/3-512.png'}}"/>
+          </div>
+          <div class="col-md-9">
+            <div class="card-line">
+              <h5 class="forum-text-padding"><b>Name:</b></h5>
+              <h5>{{post.posts_name}}</h5>
+            </div>
+            <div class="card-line">
+              <h5 class="forum-text-padding"><b>Description:</b></h5>
+              <h5>{{post.description}}</h5>
+            </div>
+            <div class="card-line">
+              <h5 class="forum-text-padding"><b>Contact:</b></h5>
+              <h5>{{post.contact}}</h5>
+            </div>
+            <div class="card-line">
+              <h5 class="forum-text-padding"><b>Posted:</b></h5>
+              <h5><time am-time-ago="post.created_at">{{post.created_at}}</time></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
 </div>
-
-<!-- ++++++++++++Displayed Posts++++++++++ -->
 
   <!-- ++++++++++++++HAVE COLUMN++++++++++++++ -->
-  <div></div>
+  <!-- <div></div>
   <div class="col-md-6 text-center">
   <h2 class="header-style color-green-dark">Offerings</h2>
   <h5 class="subtext-style color-green-dark">from your fellow community gardeners</h5>
+
   <div ng-repeat="post in $ctrl.havePosts | orderBy : post.created_at : true | filter : searchText">
     <div class="card-group">
   <div class="card scroll-box">
@@ -69,9 +173,9 @@
   </div>
     </div>
 </div>
-</div>
+</div> -->
 <!-- ++++++++++++++NEED COLUMN++++++++++++++ -->
-<div></div>
+<!-- <div></div>
 <div class="col-md-6 text-center">
   <h2 class="header-style color-green-dark">Requests</h2>
   <h5 class="subtext-style color-green-dark">from your fellow community gardeners</h5>
@@ -96,4 +200,4 @@
   </div>
     </div>
 </div>
-</div>
+</div> -->

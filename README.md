@@ -11,12 +11,9 @@
 
 
 To Do:
-Include visual callout for the logged-in user's plot
-Fix CSS for produce page
-Fix styling for forum and make it more responsive
+Hover state for remove button in plot modal
+Fix button selection state
+Media query for updating card class on smaller devices
 
 Known Bugs:
-Editing produce in any garden except Centennial does not work
-User must refresh page to view updates when removing produce from a plot
-Users can edit most plots when they should only be able to edit their own
 SVG gaps should still register as "hovered" or "clicked"

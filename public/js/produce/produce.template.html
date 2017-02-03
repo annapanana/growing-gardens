@@ -1,34 +1,52 @@
-<h1 style="margin-bottom: 5%;" class="text-center color-green-dark">PRODUCE</h1>
-<div class="container">
-  <div class="col-md-6">
-    <p style="max-width: 80%; font-size: 1.2em;" class="text-center color-green-dark">These two vizualizations represent a complete inventory of growing gardens' current produce shown by popularity and ratio. Enjoy!</p>
-    <div style="border: 4px solid #6DAD73; border-radius: 2%; margin-top: 3%; margin-bottom: 5%; max-width: 93%; padding: 15px;" class="row top-6-list">
-      <h3 style="margin-bottom: 2%;" class="color-green-dark">Top 6 Vegetables Grown</h3>
-      <div class="text-center chip-container">
-        <div ng-repeat="produce in $ctrl.produces" ng-if="$index <= 5">
-          <li class="chip">
-            <img class="chip-icon" ng-src="{{produce.image_url}}" alt="produce-icon"><span class="chip-text">{{produce.name}}</span>
-            <!-- Only Display if UID is valid -->
-          </li>
-        </div>
-      </div>
-    </div>
-    <div style="border: 4px solid #D9D6A2; margin-bottom: 10%; border-radius: 2%; max-width: 93%; padding: 15px;" class="row bottom-6-list">
-      <h3 style="margin-bottom: 2%;" class="color-green-dark">Bottom 6 Vegetables Grown</h3>
-      <div class="text-center chip-container">
-        <div ng-repeat="produce in $ctrl.produces" ng-if="$index >= ($ctrl.objLength - 6)">
-          <li class="chip">
-            <img class="chip-icon" ng-src="{{produce.image_url}}" alt="produce-icon"><span class="chip-text">{{produce.name}}</span>
-            <!-- Only Display if UID is valid -->
-          </li>
-        </div>
-      </div>
-    </div>
-    <img style="margin-left: -17px; margin-top: -7%; max-width: 93%;" ng-src="../../assets/produce_scale.svg" />
+<div class="content-buffer text-center row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h2 class="color-green-dark">Produce Visualization</h2>
+    <h4 class="color-green-light">this visualization represents a complete inventory of growing gardens' current produce shown by popularity and ratio</h4>
   </div>
-  <div class="col-md-6">
-    <div class="bc-container">
-      <div style="margin-left: 10px; margin-top: -28px" id="vis"></div>
-    </div>
-  </div>
+  <div class="col-md-2"></div>
 </div>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <img ng-src="../../assets/produce_scale.svg" />
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="bc-container">
+      <h5 class="text-center color-green-light">(hover over bubbles to view produce)</h5>
+      <div id="vis" class="text-center"></div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h3 class="color-green-dark">Top 10 Vegetables Grown</h3>
+    <div class="text-center chip-container">
+      <div ng-repeat="produce in $ctrl.produces" ng-if="$index <= 10">
+        <li class="chip">
+          <img class="chip-icon" ng-src="{{produce.image_url}}" alt="produce-icon"><span class="chip-text">{{produce.name}}</span>
+          <!-- Only Display if UID is valid -->
+        </li>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<!-- <div class="row">
+  <h3 class="color-green-dark">Bottom 6 Vegetables Grown</h3>
+  <div class="text-center chip-container">
+    <div ng-repeat="produce in $ctrl.produces" ng-if="$index >= ($ctrl.objLength - 6)">
+      <li class="chip">
+        <img class="chip-icon" ng-src="{{produce.image_url}}" alt="produce-icon"><span class="chip-text">{{produce.name}}</span>
+      </li>
+    </div>
+  </div>
+</div> -->

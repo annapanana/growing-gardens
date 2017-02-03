@@ -1,7 +1,7 @@
 function bubbleChart() {
   // Constants for sizing
-  var width = 600; // 940
-  var height = 600;
+  var width = 800; // 940
+  var height = 500;
 
   // tooltip for mouseover functionality
   var tooltip = floatingTooltip('growing_gardens_tt', 240);
